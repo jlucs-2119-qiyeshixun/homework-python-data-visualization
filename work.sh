@@ -1,3 +1,5 @@
+cd /home/admin/expr/cronjob/homework-python-data-visualization
+
 python3 script/popular_data.py 
 
 tme=`date`
