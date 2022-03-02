@@ -7,5 +7,5 @@ git add .
 
 echo $commit | bash
 
-git branch
+#git branch
 git push origin master:popular_data
