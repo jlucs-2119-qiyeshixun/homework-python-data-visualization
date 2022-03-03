@@ -111,6 +111,7 @@ def analysis_all_region():
     plt.bar(range(len(labels)), values, tick_label=labels, color=['r', 'g', 'b', 'y', 'c', 'm', 'k'])
     plt.tick_params(axis='both', labelsize=15)
     plt.xlabel('\nB站各区热榜播放量柱形图', fontsize=20)
+
     for a, b in zip(range(len(labels)), values):
         plt.text(a, b + 0.05, '%.2f亿' % b, ha='center', va='bottom', fontsize=15)
 
