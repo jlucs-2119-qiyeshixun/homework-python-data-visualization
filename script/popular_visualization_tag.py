@@ -1,61 +1,9 @@
-
-# import json
-
-# f = open('da.json', "r")
-# data = f.readline()
-
-# data = json.loads(data)
-# data = data["data"]["typelist"]
-
-# ans = {}
-# for x in data:
-#     ans[x["id"]] = {
-#         "name": x["name"],
-#         "parent": x["parent"],
-#         "desc": x["desc"]
-#     }
-#     for y in x["children"]:
-#         ans[y["id"]] = {
-#             "name": y["name"],
-#             "parent": y["parent"],
-#             "desc": y["desc"]
-#         }
-
-# with open('ans.json', "w", encoding="utf-8") as f:
-#     f.write(json.dumps(ans, ensure_ascii=False))
-
-
-
-
 from cProfile import label
 from random import random
 from time import time
 import matplotlib.pyplot as plt
-import matplotlib.animation
 import numpy as np
 import popular_amount as amount
-import random
-
-
-# fig = plt.figure()
-# ax = fig.add_subplot(2,2,1)
-
-# plt.ion()  # 开启交互模式
-# # ax.subplots()
-
-# for j in range(20):
-#     fig.clf()     # 清空画布
-#     ax.xlim(0, 10)      # 因为清空了画布，所以要重新设置坐标轴的范围
-#     ax.ylim(0, 10)
-    
-#     x = [random.randint(1,9) for i in range(10)]
-#     y = [random.randint(1,9) for i in range(10)]
-    
-#     ax.scatter(x, y)
-#     ax.pause(0.2)
-    
-# ax.ioff()
-# plt.show()
 
 name_dict = {
     "favorate":"高点赞",
@@ -114,7 +62,7 @@ fig = plt.figure()
 fig.canvas.mpl_connect("button_press_event",on_press)
 
 ax1 = fig.add_subplot(2,1,1)
-ax2 = fig.add_subplot(2,1,2)
+ax2 = fig.add_subplot(2,2,3)
 
 rcmd_tag_amount,date_list = amount.get_rcmd_tag()
 
