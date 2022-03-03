@@ -1,10 +1,15 @@
 import json
 import os
+import matplotlib.pyplot as plt
+
 time_from = 20220202
 time_to = 20220302
 
 data_dir = f"../data/region_data/{time_from}_{time_to}/"
 result_dir = f"../result/region_data/{time_from}_{time_to}/"
+
+plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+plt.rcParams['axes.unicode_minus'] = False
 
 
 def get_result():
@@ -12,7 +17,6 @@ def get_result():
         if file.split(".")[-1] != "json":
             continue
         region_name = file.split("_")[-1].split(".")[0]
-
         final_ans = {
             "r_name": region_name,
             "data": [],
@@ -51,12 +55,42 @@ def get_result():
         with open(result_dir + f"result_{region_name}.json", "w", encoding='utf-8') as ff:
             ff.write(json.dumps(final_ans, ensure_ascii=False))
 
+
 def analysis():
     for file in os.listdir(result_dir):
         if file.split(".")[-1] != "json":
             continue
         region_name = file.split("_")[-1].split(".")[0]
-        print(region_name)
+        with open(result_dir + file, "r", encoding="utf-8") as f:
+            line_data = f.readline()
+            line_data = json.loads(line_data)["data"]
+
+            total = 0
+            labels = []
+            values = []
+            for x in line_data:
+                labels.append(x["name"])
+                values.append(x["total_play"])
+                total += x["total_play"]
+
+            plt.figure(figsize=(20, 20))
+            explode = [0.05 for i in range(len(line_data))]
+            patches, l_text, p_text = plt.pie(values,
+                                            explode=explode,
+                                            labels=labels,
+                                            autopct='%0.1f%%')
+            for t in l_text:
+                t.set_size(30)
+            for t in p_text:
+                t.set_size(25)
+
+            fl = "{:.2f}".format(total/1e8)
+            plt.text(-0.3, -1.4, f"总播放量：{fl}亿次", family='Arial Unicode MS', fontsize=30, style='italic')
+            plt.title(f'B站{region_name}区 热门视频播放量占比\n\n 20220202～20220302', fontsize=30)
+            plt.savefig(f'../picture/B站{region_name}区 热门视频播放量占比.jpg')
+            #plt.show()
+
+
 
 #get_result()
-analysis()
+#analysis()
