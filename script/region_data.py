@@ -7,7 +7,7 @@ import sys
 from tqdm import tqdm
 import logging
 from datetime import datetime
-from config import region_config
+from config import region_config, region_info
 
 def getTime():
     curr = datetime.now()
@@ -98,19 +98,26 @@ def get_region_radios():
         list = tmp["list"]
         data = []
         name = tmp["name"]
+        total = 0
 
         logging.info(f"{name}区分区如下: {list}")
         for tid in list:
+            r_name = region_info[str(tid)]["name"]
             r_data = get_small_region_radios(tid, "click")
-            data += r_data
-            logging.info(f"成功爬取{name}区{tid}分区数据共{len(r_data)}条")
+            data.append({
+                "name": r_name,
+                "list": r_data
+            })
+            logging.info(f"成功爬取{name}区_{r_name}分区数据共{len(r_data)}条")
+            total += len(r_data)
+
         f = open(f"../data/region_data/{time_from}_{time_to}/data_{name}.json", "w", encoding='utf-8')
         ans = {
             "data": data,
-            "total": len(data)
+            "total": total
         }
         f.write(json.dumps(ans, ensure_ascii=False))
-        logging.info(f"--------------------------------{name}区全部爬取完毕，共{len(data)}条数据-----------------------------")
+        logging.info(f"--------------------------------{name}区全部爬取完毕，共{total}条数据-----------------------------")
 
 
 get_region_radios()
