@@ -1,6 +1,7 @@
 import json
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 time_from = 20220202
 time_to = 20220302
@@ -90,7 +91,32 @@ def analysis():
             plt.savefig(f'../picture/B站{region_name}区 热门视频播放量占比.jpg')
             #plt.show()
 
+def analysis_all_region():
+    labels = []
+    values = []
+    for file in os.listdir(result_dir):
+        if file.split(".")[-1] != "json":
+            continue
+        region_name = file.split("_")[-1].split(".")[0]
+        labels.append(region_name)
+        with open(result_dir + file, "r", encoding="utf-8") as f:
+            line_data = f.readline()
+            total = "{:.2f}".format(json.loads(line_data)["total_play"]/1e8)
+            values.append(float(total))
+
+    print(labels)
+    print(values)
+    plt.figure(figsize=(10, 10))
+    plt.yticks(np.arange(0, 8, 0.5))
+    plt.bar(range(len(labels)), values, tick_label=labels, color=['r', 'g', 'b', 'y', 'c', 'm', 'k'])
+    plt.tick_params(axis='both', labelsize=15)
+    plt.xlabel('\nB站各区热榜播放量柱形图', fontsize=20)
+    for a, b in zip(range(len(labels)), values):
+        plt.text(a, b + 0.05, '%.2f亿' % b, ha='center', va='bottom', fontsize=15)
+
+    plt.savefig(f'../picture/B站各区热榜播放量柱形图.jpg')
 
 
 #get_result()
 #analysis()
+analysis_all_region()
