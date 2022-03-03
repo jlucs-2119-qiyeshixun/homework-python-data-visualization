@@ -1,20 +1,24 @@
-import shlex
+import json
 
-f = open('da.txt', "r")
-lines = f.readlines()
-flag = 0
-mp = {}
-zid = 0
-for x in lines:
-    if x == "\n":
-        flag = 1
-        continue
+f = open('da.json', "r")
+data = f.readline()
 
-    id = x.split(': ')[0]
-    if flag:
-        zid = id
-        flag = 0
-    else:
-        mp[id] = zid
+data = json.loads(data)
+data = data["data"]["typelist"]
 
-ff = open()
+ans = {}
+for x in data:
+    ans[x["id"]] = {
+        "name": x["name"],
+        "parent": x["parent"],
+        "desc": x["desc"]
+    }
+    for y in x["children"]:
+        ans[y["id"]] = {
+            "name": y["name"],
+            "parent": y["parent"],
+            "desc": y["desc"]
+        }
+
+with open('ans.json', "w", encoding="utf-8") as f:
+    f.write(json.dumps(ans, ensure_ascii=False))
