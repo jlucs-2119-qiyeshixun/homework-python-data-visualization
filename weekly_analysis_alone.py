@@ -27,7 +27,8 @@ type = ['play','danmu','comment','like','coin','collect']
 def autolabel(rects):
     for rect in rects:
         height = rect.get_height()
-        plt.text(rect.get_x()+rect.get_width()/2.- 0.2, 1.03*height, '%s' % int(height))
+        plt.text(rect.get_x()+rect.get_width()/2.- 0.2, 1.03*height, '%s' % round(float(height/100000000),3)+'亿')
+
 
 
 #绘图
