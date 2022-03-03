@@ -49,10 +49,12 @@ def get_week_info(first, TOTAL_PAGE):
         for item in videolist:
             data.append(get_video_info(item))
             # df = pd.DataFrame(data,columns=['bvid', 'title', 'mid', 'author', 'play', 'danmu', 'comment', 'like', 'coin', 'collect'])
-            json_str = json.dumps(data, ensure_ascii=False, indent=4)
-            cwd = os.getcwd()
-            with open(cwd + '/data/weekly-recommend/' + str(nowNum) + '.json', 'w', encoding='utf-8') as json_file:
-                json_file.write(json_str)
+        json_str = json.dumps(data, ensure_ascii=False, indent=4)
+        cwd = os.getcwd()
+        cwd = cwd[:cwd.find('script')]
+        with open(cwd + 'data/weekly-recommend/' + str(nowNum) + '.json', 'w', encoding='utf-8') as json_file:
+            json_file.write(json_str)
+        print(f'第{nowNum}期每周必看爬取完毕')
     return data
 
 data = get_week_info(153, 30)
