@@ -1,3 +1,4 @@
+
 # import json
 
 # f = open('da.json', "r")
@@ -57,11 +58,5 @@ for k,v in rcmd_tag_amount.items():
 
 
 plt.show()
-
-
-
-
-
-
 
 
