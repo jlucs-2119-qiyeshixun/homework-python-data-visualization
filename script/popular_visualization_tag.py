@@ -19,7 +19,8 @@ def draw_fig1():
     for k,v in rcmd_tag_amount.items():
         ax1.plot(v['time'],v['list'],label=name_dict[k])
     ax1.legend()
-    ax1.set_title('哔哩哔哩热榜标签占比')
+    ax1.set(xlabel='(日期自2020-3-3日开始)',ylabel='标签所占百分比',title='哔哩哔哩热榜标签占比')
+
 
 def draw_fig2(idx):
 
@@ -30,7 +31,7 @@ def draw_fig2(idx):
         return
     key = date_list[idx]
     print(key,idx)
-    item = amount.get_by_datetime(key)
+    item = amount.get_rcmd_by_datetime(key)
     
     
     sizes = [len(v['list']) for k,v in item.items()]
@@ -42,9 +43,10 @@ def draw_fig2(idx):
 
     ax2.clear()
     ax2.set_title(f'热榜标签占比 {key.day}日 {key.hour}时 数据')
-    ax2.pie(sizes,pctdistance=1.12,autopct='%1.2f%%',explode = explode)
-    ax2.legend(labels=labels,loc='lower right')
+    ax2.pie(sizes,pctdistance=1.12,autopct='%1.2f%%',explode = explode,radius=1.2)
+    ax2.legend(labels=labels,loc='right',borderaxespad=-12)
     ax2.figure.canvas.draw()
+    
 
 
 def on_press(event):
@@ -62,7 +64,7 @@ fig = plt.figure()
 fig.canvas.mpl_connect("button_press_event",on_press)
 
 ax1 = fig.add_subplot(2,1,1)
-ax2 = fig.add_subplot(2,2,3)
+ax2 = fig.add_subplot(2,1,2)
 
 rcmd_tag_amount,date_list = amount.get_rcmd_tag()
 
