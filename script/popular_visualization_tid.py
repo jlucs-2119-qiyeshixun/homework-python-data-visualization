@@ -12,8 +12,9 @@ def draw_fig1():
     for k,v in tid_amount.items():
         # print(v)
         ax1.plot(v['date'],v['list'],label=config.region_info[str(k)]['name'],markersize=3,marker='o')
+    lstdate = date_list[-1]
     ax1.legend()
-    ax1.set(xlabel='(日期自2020-3-3日开始)',ylabel='大类所占百分比',title='哔哩哔哩热榜视频所属大类占比')
+    ax1.set(xlabel='(日期自2020-3-3日开始)',ylabel='大类下视频个数',title=f'哔哩哔哩热榜视频所属大类占比,截至{lstdate.day}日{lstdate.hour}时')
 
 def draw_fig2(idx):
 
@@ -29,7 +30,7 @@ def draw_fig2(idx):
     
     sizes = [v['count'] for v in item]
     labels = [v['name'] for v in item]
-    explode = [0.05 for k in item]
+    explode = [0.02 for k in item]
 
     # print(sizes)
     # print(labels)
