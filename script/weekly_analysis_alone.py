@@ -29,10 +29,14 @@ ext = [0.35, 0.38, 0.35, 0.5, 0.39, 0.4]
 def autolabel(rects, cnt):
     for rect in rects:
         height = rect.get_height()
-        plt.text(rect.get_x() + rect.get_width()/2 - ext[cnt], height + 5, '%s' % round(float(height/rate[cnt]),1))
+        if cnt == 0:
+            plt.text(rect.get_x() + rect.get_width()/2 - ext[cnt] - 0.1, height + 5, '%s' % round(float(height/rate[cnt]), 1) + dw[cnt])
+        else:
+            plt.text(rect.get_x() + rect.get_width() / 2 - ext[cnt] - 0.05, height + 5, '%s' % int(float(height / rate[cnt])) + dw[cnt])
 
 #绘图
-x = np.arange(1,31)
+x = [f"{x}期" for x in range (124,154) ]
+
 cnt = 0
 for i in type:
     plt.figure(figsize=(16, 4))

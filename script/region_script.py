@@ -119,5 +119,5 @@ def analysis_all_region():
 
 
 #get_result()
-analysis()
-analysis_all_region()
+#analysis()
+#analysis_all_region()
