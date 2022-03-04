@@ -17,9 +17,10 @@ name_dict = {
 
 def draw_fig1():
     for k,v in rcmd_tag_amount.items():
-        ax1.plot(v['time'],v['list'],label=name_dict[k])
+        ax1.plot(v['time'],v['list'],label=name_dict[k],markersize=3,marker='o')
+    lstdate = date_list[-1]
     ax1.legend()
-    ax1.set(xlabel='(日期自2020-3-3日开始)',ylabel='标签所占百分比',title='哔哩哔哩热榜标签占比')
+    ax1.set(xlabel='(日期自2020-3-3日开始)',ylabel='标签所占百分比',title=f'哔哩哔哩热榜标签占比,截至{lstdate.day}日{lstdate.hour}时')
 
 
 def draw_fig2(idx):
@@ -36,7 +37,7 @@ def draw_fig2(idx):
     
     sizes = [len(v['list']) for k,v in item.items()]
     labels = [name_dict[k] for k,v in item.items()]
-    explode = [0.01 for k in item.items()]
+    explode = [0.02 for k in item.items()]
 
     # print(sizes)
     # print(labels)
@@ -64,7 +65,7 @@ fig = plt.figure()
 fig.canvas.mpl_connect("button_press_event",on_press)
 
 ax1 = fig.add_subplot(2,1,1)
-ax2 = fig.add_subplot(2,1,2)
+ax2 = fig.add_subplot(2,2,3)
 
 rcmd_tag_amount,date_list = amount.get_rcmd_tag()
 
