@@ -8,7 +8,7 @@ time_to = 20220302
 
 data_dir = f"../data/region_data/{time_from}_{time_to}/"
 result_dir = f"../result/region_data/{time_from}_{time_to}/"
-
+picture_dir = '../picture/region/'
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
 
@@ -88,7 +88,7 @@ def analysis():
             fl = "{:.2f}".format(total/1e8)
             plt.text(-0.3, -1.4, f"总播放量：{fl}亿次", family='Arial Unicode MS', fontsize=30, style='italic')
             plt.title(f'B站{region_name}区 热门视频播放量占比\n\n 20220202～20220302', fontsize=30)
-            plt.savefig(f'../picture/B站{region_name}区 热门视频播放量占比.jpg')
+            plt.savefig(f'{picture_dir}B站{region_name}区 热门视频播放量占比.jpg')
             #plt.show()
 
 def analysis_all_region():
@@ -115,9 +115,9 @@ def analysis_all_region():
     for a, b in zip(range(len(labels)), values):
         plt.text(a, b + 0.05, '%.2f亿' % b, ha='center', va='bottom', fontsize=15)
 
-    plt.savefig(f'../picture/B站各区热榜播放量柱形图.jpg')
+    plt.savefig(picture_dir + 'B站各区热榜播放量柱形图.jpg')
 
 
 #get_result()
-#analysis()
+analysis()
 analysis_all_region()

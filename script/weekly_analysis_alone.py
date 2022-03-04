@@ -6,7 +6,7 @@ import numpy as np
 plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
 plt.rcParams['axes.unicode_minus'] = False
 
-path = "data/weekly-recommend/"
+path = "../data/weekly-recommend/"
 fileList = os.listdir(path)
 fileList.sort()
 
@@ -35,7 +35,7 @@ def autolabel(rects, cnt):
 x = np.arange(1,31)
 cnt = 0
 for i in type:
-    plt.figure(figsize=(20, 8))
+    plt.figure(figsize=(16, 4))
     Weeks = []
     for oneWeek in DataList:
         num = 0
@@ -45,6 +45,6 @@ for i in type:
     autolabel(plt.bar(range(len(Weeks)), Weeks, tick_label=x, width=0.8, lw=1), cnt)
     plt.title('B站每周必看分区 近三十周'+ name[cnt] +'走势' + f"(单位:{dw[cnt]})")
 
-    plt.savefig(f'./weely_pic_alone/{name[cnt]}.jpg')
+    plt.savefig(f'../picture/weely_pic_alone/{name[cnt]}.jpg')
     cnt += 1
 #    plt.show()
